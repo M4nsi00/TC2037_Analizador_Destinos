@@ -1,1 +1,4 @@
 # TC2037_Analizador_Destinos
+## ----------Objetivos del Proyecto----------
+Se desarrollo un motor de busqueda que cruza las variables de Clima y Presupuesto para determinar el mejor Destino Turístico entre 9 planeados. Siendo estos Cancun, Paris, Vancouver, Tokio, Bogota, Buenos Aires, Isla Mujeres, Yucatan y Madrid. Este motor se desarrollo en dos parádigmas de programación diferentes. Paradigma lógica (Utilizando el lenguaje Prolog) y el Paradgima funcional (Utiliando la herramienta de Dr. Racket).
+Se opto por estos paradigmas ya que no necesitan de condicionales anidados para hacer la busqueda, son paradigmas sin estados, lo que hacen el código limpio y fácil de mantener.
