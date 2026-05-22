@@ -1,5 +1,5 @@
 # TC2037_Analizador_Destinos
-## Descriçión y Contexto
+## Descripión y Contexto
 ### ----------Definición del Proyecto----------
 El proyecto consiste en el diseño y la implementación de un Motor de Busqueda de Destinos Turísticos. A partir de las restricciones del usuario, definidas por variables categóricas de Clima (frio, calido, templado) y Presupuesto (alto, medio, bajo). el motor evalua un universo y discrimnia cuáles pueden adaptarse al perfil solicitado.
 
@@ -17,7 +17,7 @@ La solución lógica se modela abstrayendo el problema en una relación. No se c
 El modelo de ejecución se rige por un Árbol de Resolución por Búsqueda en Profundidad (DFS). Cuando el usuario realiza una consulta con variables libtes, el motor de Prolog recorre el árbol de arriba hacia abajo intetnando ligar los términos. Si una rama no satisface el predicado, el lenguaje ejecuta un proceso de Backtracking regresando al nodo de elección anterior para buscar la siguiente alternativa.
 
 ### ----------Arquitectura del Paradgima Funcional (Solución en Racket)----------
-- Estructura de Datos: El unvierso se modela como una lista inmutable de listas.
+- Estructura de Datos: El universo se modela como una lista inmutable de listas.
 - Control de flujo: Se elimina el uso de ciclos y se utiliza Recursión de Cabeza.
 - Operadores: La arquitectura del programa descompone la lista utilizando first (para extraer y evaluar la cabeza de la lista) y rest (para aislar el resto de la lista y pasarla a la siguiente llamada recursiva). La reconstrucción de la lista filtrada con las coincidencias exitosas se realiza en la pila de retorno con el apoyo de un constructor puramente funcional.
 
@@ -36,7 +36,7 @@ Para el caso del proyecto resuelto en el Paradigma Funcional se necesita tener i
 3. Ejecutar las pruebas usando la función (pruebas). (NOTA: para esta parte se debe de poner con todo y los parentesis que quede así "(pruebas)").
 
 ## Análisis Teórico y Complejidad Profunda
-Para fundamentar rigurosamente la viabilidad de las soluciones implementadas, analizamos sus dimensiones temporales y sintácticas bajo las directrices clásicas de Friedrich L. Bauer en "Compiladores (Programas para Computadora)" y la Jerarquía de Gramáticas de Noam Chomsky.
+Para fundamentar rigurosamente la viabilidad de las soluciones implementadas, analizamos sus dimensiones temporales y sintácticas bajo las directrices clásicas de Friedrich L. Bauer en "Compiladores (Programas para Computadora)".
 
 ### ----------Complejidad del Peor Caso----------
 ### Paradigma funcional 
@@ -47,4 +47,9 @@ Dado que el predicado de evaluación condicional if ejecuta comparaciones equal?
 El comportamiento temporal de Prolog se deriva de la resolución sobre un árbol de Cláusulas de Horn. En el peor escenario teórico (cuando la consulta obliga a evaluar todas las alternativas o cuando resulta en un descarte global false), el motor expande exhaustivamente cada nodo del espacio de estados.
 Bauer detalla que los esquemas de emparejamiento sintáctico basados en retroceso (backtracking) sufren de penalizaciones temporales multiplicativas al cruzar múltiples metas independientes con variables libres. La complejidad matemática se define como: $O(N*M)$. Donde N es el número de hechos y M representa la cantidad de restricciones en la regla.
 
-### ----------Análisis desde la Jerarquía de Chomsky y Autómatas----------
+### Conclusión de Viabilidad
+- Factibilidad en Mantenimiento y Diseño, El paradgima lógico es sumamente viable para sistemas con reglas dinámicas. Permite que con la misma regla, se puedan hacer consultas no solo de cual es el Destino que cumple con mi Clima y Presupuesto, Podemos buscar Destinos para un clima o ver las caractéristicas de un Destino. 
+En Racket esto es inviable; al ser funciones puras, los parámetros de entrada estan fijos y se requeriría agregar algoritmos complementarios para invertir el sentido de la consulta.
+- Factbilidad en Rendimiento y Estabilidad, Si el volumen de datos escalara de forma masiva, el enfoque funcional es superior. Su complejidad lineal es completamente determinista y predecible, lo que lo hace inmune a bucles infinitos o explosiones, cosas que el backtracking de Prolog puede provocar si los árboles de decisión crecen sin un control de cortes.
+
+Como se puede ver se considera que ambas soluciones tienen sus puntos fuertes como sus desventajas, es por esto que se decidio implementar ambas propuestas en el proyecto. Para este caso el más factible es el diseño lógico, aunque el diseño funcional no se queda tan atrás, tiene sus ventajas cuando el enfoque es la escalabilidad y estabilidad, pero para el tamaño de proyecto que se implemento esto no afecta.
