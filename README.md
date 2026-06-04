@@ -8,6 +8,10 @@ En desarrollo de software la POO, la resolución a este problema sería mediante
 
 Este proyecto es interesante porque demuestra cómo los paradigmas declarativos (lógico y funcional) permiten separar por completo la lógica del negocio del control de flujo. Al eliminar los estados y los ciclos explícitos, se obtiene un sistema verificable, donde añadir nuevos hechos o modificar restricciones no altera la estabilidad o la arquitectura del programa principal.
 
+![Texto alternativo](/imagenes_apoyo/Diagrama_Base.png)
+
+#### **Diagrama Base del proyecto**
+
 ## Modelos y Arquitectura
 ### ----------Arquitectura del Paradgima Lógigo (Solución en Prolog)----------
 La solución lógica se modela abstrayendo el problema en una relación. No se crea un algortimo de búsqueda, se describen los datos y sus interconexiones:
@@ -16,10 +20,19 @@ La solución lógica se modela abstrayendo el problema en una relación. No se c
 
 El modelo de ejecución se rige por un Árbol de Resolución por Búsqueda en Profundidad (DFS). Cuando el usuario realiza una consulta con variables libtes, el motor de Prolog recorre el árbol de arriba hacia abajo intetnando ligar los términos. Si una rama no satisface el predicado, el lenguaje ejecuta un proceso de Backtracking regresando al nodo de elección anterior para buscar la siguiente alternativa.
 
+![Texto alternativo](/imagenes_apoyo/Diagrama_logico.png)
+
+#### **Diagrama de la Implementación del Paradignma Lógico**
+
+
 ### ----------Arquitectura del Paradgima Funcional (Solución en Racket)----------
 - Estructura de Datos: El universo se modela como una lista inmutable de listas.
 - Control de flujo: Se elimina el uso de ciclos y se utiliza Recursión de Cabeza.
 - Operadores: La arquitectura del programa descompone la lista utilizando first (para extraer y evaluar la cabeza de la lista) y rest (para aislar el resto de la lista y pasarla a la siguiente llamada recursiva). La reconstrucción de la lista filtrada con las coincidencias exitosas se realiza en la pila de retorno con el apoyo de un constructor puramente funcional.
+
+![Texto alternativo](/imagenes_apoyo/Diagrama_funcional.png)
+
+#### **Diagrama de la Implementación del Paradignma Funcional**
 
 ## Implementación y Correr pruebas
 Ambos programas estan en este repositorio con el nombre de "analizador_destinos". Ambos programas tambien cuentan con una función de pruebas, la cual arroja 20 pruebas programadas donde los primeros 12 casos son buenos y deben mostrar un destino y los últimos 8 casos no arrojan ningun destino por cosas como los filtros eran incorrectos o no hay destino específico para ese clima y presupuesto.
@@ -53,3 +66,9 @@ En Racket esto es inviable; al ser funciones puras, los parámetros de entrada e
 - Factbilidad en Rendimiento y Estabilidad, Si el volumen de datos escalara de forma masiva, el enfoque funcional es superior. Su complejidad lineal es completamente determinista y predecible, lo que lo hace inmune a bucles infinitos o explosiones, cosas que el backtracking de Prolog puede provocar si los árboles de decisión crecen sin un control de cortes.
 
 Como se puede ver se considera que ambas soluciones tienen sus puntos fuertes como sus desventajas, es por esto que se decidio implementar ambas propuestas en el proyecto. Para este caso el más factible es el diseño lógico, aunque el diseño funcional no se queda tan atrás, tiene sus ventajas cuando el enfoque es la escalabilidad y estabilidad, pero para el tamaño de proyecto que se implemento esto no afecta.
+
+
+## Referencias
+* **Bauer, F. L., & Goos, G.** (1982). *Compiladores (Programas para Computadora): Un Tratado Avanzado*. Editorial Reverté.
+* **Flatt, M., & PLT.** (2026). *Reference: Racket*. Racket Documentation. https://docs.racket-lang.org/reference/
+* **Wielemaker, J.** (2026). *SWI-Prolog Reference Manual* (Version 9.2). SWI-Prolog. https://www.swi-prolog.org/pldoc/doc_for?object=root

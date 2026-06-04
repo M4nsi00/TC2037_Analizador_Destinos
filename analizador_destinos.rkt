@@ -25,8 +25,8 @@
      (define resto (rest lista))
      
      ;; Verificamos si el destino actual cumple con los requisitos del usuario
-     (if (and (equal? (second actual) clima)
-              (equal? (third actual) presupuesto))
+     (if (and (equal? (first (rest actual)) clima)
+              (equal? (first (rest(rest actual))) presupuesto))
          ;; Si cumple, lo agregamos al resultado y seguimos revisando el resto
          (cons actual (recomendar clima presupuesto resto))
          ;; Si no cumple, lo ignoramos y seguimos revisando el resto
