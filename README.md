@@ -1,5 +1,5 @@
 # TC2037_Analizador_Destinos
-## Descripión y Contexto
+## Descripción y Contexto
 ### ----------Definición del Proyecto----------
 El proyecto consiste en el diseño y la implementación de un Motor de Busqueda de Destinos Turísticos. A partir de las restricciones del usuario, definidas por variables categóricas de Clima (frio, calido, templado) y Presupuesto (alto, medio, bajo). el motor evalua un universo y discrimnia cuáles pueden adaptarse al perfil solicitado.
 
@@ -13,19 +13,19 @@ Este proyecto es interesante porque demuestra cómo los paradigmas declarativos 
 #### **Diagrama Base del proyecto**
 
 ## Modelos y Arquitectura
-### ----------Arquitectura del Paradgima Lógigo (Solución en Prolog)----------
+### ----------Arquitectura del Paradigma Lógigo (Solución en Prolog)----------
 La solución lógica se modela abstrayendo el problema en una relación. No se crea un algortimo de búsqueda, se describen los datos y sus interconexiones:
-1. Base de Conocimientos (Hechos): Estructura lineal que contiele los destinos con sus propiedades atómicas: destino(Destino, Clima, Presupuesto).
-2. Motor de Inferencia (Reglas): Predicados abtractos que operan mediante unificación.
+1. Base de Conocimientos (Hechos): Estructura lineal que contiene los destinos con sus propiedades atómicas: destino(Destino, Clima, Presupuesto).
+2. Motor de Inferencia (Reglas): Predicados abstractos que operan mediante unificación.
 
-El modelo de ejecución se rige por un Árbol de Resolución por Búsqueda en Profundidad (DFS). Cuando el usuario realiza una consulta con variables libtes, el motor de Prolog recorre el árbol de arriba hacia abajo intetnando ligar los términos. Si una rama no satisface el predicado, el lenguaje ejecuta un proceso de Backtracking regresando al nodo de elección anterior para buscar la siguiente alternativa.
+El modelo de ejecución se rige por un Árbol de Resolución por Búsqueda en Profundidad (DFS). Cuando el usuario realiza una consulta con variables libres, el motor de Prolog recorre el árbol de arriba hacia abajo intentando ligar los términos. Si una rama no satisface el predicado, el lenguaje ejecuta un proceso de Backtracking regresando al nodo de elección anterior para buscar la siguiente alternativa.
 
 ![Texto alternativo](/imagenes_apoyo/Diagrama_logico.png)
 
 #### **Diagrama de la Implementación del Paradignma Lógico**
 
 
-### ----------Arquitectura del Paradgima Funcional (Solución en Racket)----------
+### ----------Arquitectura del Paradigma Funcional (Solución en Racket)----------
 - Estructura de Datos: El universo se modela como una lista inmutable de listas.
 - Control de flujo: Se elimina el uso de ciclos y se utiliza Recursión de Cabeza.
 - Operadores: La arquitectura del programa descompone la lista utilizando first (para extraer y evaluar la cabeza de la lista) y rest (para aislar el resto de la lista y pasarla a la siguiente llamada recursiva). La reconstrucción de la lista filtrada con las coincidencias exitosas se realiza en la pila de retorno con el apoyo de un constructor puramente funcional.
@@ -61,9 +61,9 @@ El comportamiento temporal de Prolog se deriva de la resolución sobre un árbol
 Bauer detalla que los esquemas de emparejamiento sintáctico basados en retroceso (backtracking) sufren de penalizaciones temporales multiplicativas al cruzar múltiples metas independientes con variables libres. La complejidad matemática se define como: $O(N*M)$. Donde N es el número de hechos y M representa la cantidad de restricciones en la regla.
 
 ### Conclusión de Viabilidad
-- Factibilidad en Mantenimiento y Diseño, El paradgima lógico es sumamente viable para sistemas con reglas dinámicas. Permite que con la misma regla, se puedan hacer consultas no solo de cual es el Destino que cumple con mi Clima y Presupuesto, Podemos buscar Destinos para un clima o ver las caractéristicas de un Destino. 
+- Factibilidad en Mantenimiento y Diseño, El paradigma lógico es sumamente viable para sistemas con reglas dinámicas. Permite que con la misma regla, se puedan hacer consultas no solo de cual es el Destino que cumple con mi Clima y Presupuesto, Podemos buscar Destinos para un clima o ver las caractéristicas de un Destino. 
 En Racket esto es inviable; al ser funciones puras, los parámetros de entrada estan fijos y se requeriría agregar algoritmos complementarios para invertir el sentido de la consulta.
-- Factbilidad en Rendimiento y Estabilidad, Si el volumen de datos escalara de forma masiva, el enfoque funcional es superior. Su complejidad lineal es completamente determinista y predecible, lo que lo hace inmune a bucles infinitos o explosiones, cosas que el backtracking de Prolog puede provocar si los árboles de decisión crecen sin un control de cortes.
+- Factibilidad en Rendimiento y Estabilidad, Si el volumen de datos escalara de forma masiva, el enfoque funcional es superior. Su complejidad lineal es completamente determinista y predecible, lo que lo hace inmune a bucles infinitos o explosiones, cosas que el backtracking de Prolog puede provocar si los árboles de decisión crecen sin un control de cortes.
 
 Como se puede ver se considera que ambas soluciones tienen sus puntos fuertes como sus desventajas, es por esto que se decidio implementar ambas propuestas en el proyecto. Para este caso el más factible es el diseño lógico, aunque el diseño funcional no se queda tan atrás, tiene sus ventajas cuando el enfoque es la escalabilidad y estabilidad, pero para el tamaño de proyecto que se implemento esto no afecta.
 
